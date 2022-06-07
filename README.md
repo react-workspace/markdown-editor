@@ -9,16 +9,16 @@ https://mryhryki.github.io/markdown-editor/
 
 
 1. エディタ画面
-・　テキストの入力
-・　リアルタイムプレビュー
-・　テキストの保存
+- テキストの入力
+- リアルタイムプレビュー
+- テキストの保存
 
 2. 履歴画面
-・　保存したテキストの一覧表示
-・　テキストの復元
+- 保存したテキストの一覧表示
+- テキストの復元
 
 
 ## 学習目的
-React・TypeScriptを使用したフロント開発
-ブラウザの機能を使ったプロダクトの開発を学ぶ
+React・TypeScriptを使用したフロント開発.  
+ブラウザの機能を使ったプロダクトの開発を学ぶ.    
 Web Storage/IndexedDB/WebWorker/ServiceWorker
