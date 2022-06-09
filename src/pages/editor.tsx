@@ -42,10 +42,12 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
+const StorageKey = 'pages/editor:text' //保存時のキー名
 
 const editor: React.FC = () => {
-
-  const [text, setText] = useState<string>('')
+  //localStorageから取得した値をuseStateの初期値に設定。
+  //nullを返す場合があるので,||""をつけて文字列が入るように。
+  const [text, setText] = useState<string>(localStorage.getItem(StorageKey) || '')
 
 	return (
 		<>
@@ -54,7 +56,9 @@ const editor: React.FC = () => {
 			</Header>
 			<Wrapper>
         <TextArea onChange={(e) => {
-          setText(e.target.value)
+          const changedText = e.target.value
+          localStorage.setItem(StorageKey, changedText)
+          setText(changedText)
         }}
           value={text}/>
 				<Preview>プレビューエリア</Preview>
