@@ -1,5 +1,6 @@
 import *as React from 'react'
 import styled from 'styled-components'
+import { useState } from 'react'
 
 const Header = styled.header`
 font-size: 1.5rem;
@@ -42,14 +43,20 @@ const Preview = styled.div`
   width: 50vw;
 `
 
-const editor:React.FC = () => {
+const editor: React.FC = () => {
+
+  const [text, setText] = useState<string>('')
+
 	return (
 		<>
 			<Header>
 				Markdown Editor
 			</Header>
 			<Wrapper>
-				<TextArea value="テキストエリア" />
+        <TextArea onChange={(e) => {
+          setText(e.target.value)
+        }}
+          value={text}/>
 				<Preview>プレビューエリア</Preview>
 			</Wrapper>
 		</>
