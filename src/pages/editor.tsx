@@ -1,6 +1,6 @@
 import *as React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useStateWithStorage } from '../hooks/use_state_with_storage'
 
 const Header = styled.header`
 font-size: 1.5rem;
@@ -45,9 +45,7 @@ const Preview = styled.div`
 const StorageKey = 'pages/editor:text' //保存時のキー名
 
 const editor: React.FC = () => {
-  //localStorageから取得した値をuseStateの初期値に設定。
-  //nullを返す場合があるので,||""をつけて文字列が入るように。
-  const [text, setText] = useState<string>(localStorage.getItem(StorageKey) || '')
+  const [text, setText] = useStateWithStorage('', StorageKey)
 
 	return (
 		<>
@@ -56,11 +54,10 @@ const editor: React.FC = () => {
 			</Header>
 			<Wrapper>
         <TextArea onChange={(e) => {
-          const changedText = e.target.value
-          localStorage.setItem(StorageKey, changedText)
-          setText(changedText)
+          setText(e.target.value)
         }}
-          value={text}/>
+          value={text}
+          />
 				<Preview>プレビューエリア</Preview>
 			</Wrapper>
 		</>
