@@ -1,6 +1,6 @@
 import *as React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useStateWithStorage } from '../hooks/use_state_with_storage'
 
 const Header = styled.header`
 font-size: 1.5rem;
@@ -42,10 +42,10 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
+const StorageKey = 'pages/editor:text' //保存時のキー名
 
 const editor: React.FC = () => {
-
-  const [text, setText] = useState<string>('')
+  const [text, setText] = useStateWithStorage('', StorageKey)
 
 	return (
 		<>
@@ -56,7 +56,8 @@ const editor: React.FC = () => {
         <TextArea onChange={(e) => {
           setText(e.target.value)
         }}
-          value={text}/>
+          value={text}
+          />
 				<Preview>プレビューエリア</Preview>
 			</Wrapper>
 		</>
