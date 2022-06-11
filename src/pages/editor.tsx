@@ -1,4 +1,4 @@
-import *as React from 'react'
+import * as React from 'react'
 import * as ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import { useStateWithStorage } from '../hooks/use_state_with_storage'
@@ -61,7 +61,7 @@ const StorageKey = 'pages/editor:text' //保存時のキー名
 const editor: React.FC = () => {
   const [text, setText] = useStateWithStorage('', StorageKey)
 
-  const saveMemo = (): void{
+  const saveMemo = (): void =>{
     putMemo('TITLE', text)
   }
 
