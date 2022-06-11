@@ -10,14 +10,21 @@ const StyledButton = styled.button`
   height: 2rem;
   min-width: 5rem;
   padding: 0 1rem;
+
+	 &.cancel {
+    background: white;
+    border: 1px solid gray;
+    color: gray;
+  }
 	`
 
 interface Props {
+	cancel?:boolean //cancelというパラメーターを指定しなくても良いという意味
 	children: string //ボタンないに表示するテキスト
-	onClick:() => void //ボタンをクリックした場合の処理関数
+	onClick: () => void //ボタンをクリックした場合の処理関数
 }
 
-export const Button:React.FC<Props> = (props) => (
+export const Button: React.FC<Props> = (props) => (
 	<StyledButton onClick={props.onClick}>
 		{props.children}
 	</StyledButton>

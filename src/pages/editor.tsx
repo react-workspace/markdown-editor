@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { useStateWithStorage } from '../hooks/use_state_with_storage'
 import { putMemo } from '../indexeddb/memos'
 import { Button } from '../components/button'
+import SaveModal from '../components/save_modal'
+import { useState } from 'react'
 
 const Header = styled.header`
 align-content: center;
@@ -61,16 +63,14 @@ const StorageKey = 'pages/editor:text' //保存時のキー名
 const editor: React.FC = () => {
   const [text, setText] = useStateWithStorage('', StorageKey)
 
-  const saveMemo = (): void =>{
-    putMemo('TITLE', text)
-  }
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       <Header>
         Markdown Editor
         <HeaderControl>
-          <Button onClick={saveMemo}>
+          <Button onClick={() => setShowModal(true)}>
             保存する
             </Button>
         </HeaderControl>
@@ -85,6 +85,15 @@ const editor: React.FC = () => {
           <ReactMarkdown>{text}</ReactMarkdown>
         </Preview>
       </Wrapper>
+      {showModal && (
+        <SaveModal
+          onSave={(title: string): void => {
+            putMemo(title, text)
+            setShowModal(false)
+          }}
+          onCancel={() => setShowModal(false)}
+        />
+      )}
     </>
   )
 }
