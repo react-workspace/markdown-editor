@@ -6,6 +6,7 @@ import { putMemo } from '../indexeddb/memos'
 import { Button } from '../components/button'
 import SaveModal from '../components/save_modal'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = styled.header`
 align-content: center;
@@ -73,6 +74,9 @@ const editor: React.FC = () => {
           <Button onClick={() => setShowModal(true)}>
             保存する
             </Button>
+          <Link to="/history">
+            履歴を見る
+            </Link>
         </HeaderControl>
       </Header>
       <Wrapper>
