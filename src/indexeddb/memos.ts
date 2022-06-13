@@ -1,10 +1,10 @@
 import Dexie from 'dexie'
 
 //データの型定義
-export interface MemoRecord{
+export interface MemoRecord {
 	datetime: string
 	title: string
-	text:string
+	text: string
 }
 
 //Dexieのインスタンス作成
@@ -16,4 +16,10 @@ const memos: Dexie.Table<MemoRecord, string> = database.table('memos')
 export const putMemo = async (title: string, text: string): Promise<void> => {
 	const datetime = new Date().toISOString() //indexedDB保存処理
 	await memos.put({ datetime, title, text })
+}
+
+export const getMemos = (): Promise<MemoRecord[]> => {
+	return memos.orderBy('datetime')//日時の古い順で取得
+		.reverse()//逆にする（新しい順にする）
+		.toArray()//配列に変換して返却
 }
