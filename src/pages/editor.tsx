@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import { useStateWithStorage } from '../hooks/use_state_with_storage'
-import { putMemo } from '../indexeddb/memos'
+import{ putMemo } from '../indexeddb/memos'
 import { Button } from '../components/button'
 import SaveModal from '../components/save_modal'
 import { useState } from 'react'
@@ -45,11 +45,13 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
-const StorageKey = 'pages/editor:text' //保存時のキー名
+interface Props {
+  text: string
+  setText: (text: string) => void
+}
 
-const editor: React.FC = () => {
-  const [text, setText] = useStateWithStorage('', StorageKey)
-
+export const Editor: React.FC<Props> = (props) => {
+  const { text, setText } = props
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -87,4 +89,4 @@ const editor: React.FC = () => {
   )
 }
 
-export default editor
+export default Editor
